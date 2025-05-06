@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('language')->nullable();
             $table->string('otp')->nullable();
-            $table->enum('role', ['0', '1', '2', '3'])->default('0');
             $table->enum('type', ['admin', 'job_seeker', 'company'])->nullable();
             $table->rememberToken();
             $table->timestamps();
