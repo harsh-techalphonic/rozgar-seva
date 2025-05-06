@@ -11,5 +11,6 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/verify-otp', 'verify_otp')->name('verify_otp');
 });
 Route::prefix('profile')->middleware([AuthMiddleware::class])->controller(ProfileController::class)->group(function () {
-    Route::post('/add', 'add_profile')->name('add_profile');
+    Route::get('/job-attributes', 'job_attributes')->name('job_attributes');
+    Route::post('/role-and-language', 'role_and_language')->name('role_and_language');
 });
