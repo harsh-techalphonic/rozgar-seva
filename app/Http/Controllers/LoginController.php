@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobSeekerProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -38,6 +39,8 @@ class LoginController extends Controller
             $message->to($email)
                 ->subject('OTP');
         });
+        JobSeekerProfile::insert(['user_id' => $register->id]);
+        
         return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile], 200);
     }
     public function verify_otp(Request $request)
