@@ -38,7 +38,7 @@ class ProfileController extends Controller
             'message' => "Role and Language Update Successfully"
         ], 200);
     }
-    public function job_attributes(Request $request)
+    public function job_attributes()
     {
         $data = [];
         $data['job_preference'] = JobPreference::where('status', '1')->get();
