@@ -25,23 +25,22 @@ class LoginController extends Controller
                 'errors' => $validator->errors(),
             ]);
         }
-        // echo 'hello';
-        // $register = new User;
-        // $register->name = $request->input('name');
-        // $register->mobile = $request->input('mobile');
-        // $register->email = $request->input('email');
-        // $register->otp = rand(1111, 9999);
-        // $register->save();
-        // $email = $register->email;
-        // $htmlContent = "<p>OTP : <strong>{$register->otp}</strong></p>";
+        $register = new User;
+        $register->name = $request->input('name');
+        $register->mobile = $request->input('mobile');
+        $register->email = $request->input('email');
+        $register->otp = rand(1111, 9999);
+        $register->save();
+        $email = $register->email;
+        $htmlContent = "<p>OTP : <strong>{$register->otp}</strong></p>";
 
-        // Mail::html($htmlContent, function ($message) use ($email) {
-        //     $message->to($email)
-        //         ->subject('OTP');
-        // });
-        // JobSeekerProfile::insert(['user_id' => $register->id]);
+        Mail::html($htmlContent, function ($message) use ($email) {
+            $message->to($email)
+                ->subject('OTP');
+        });
+        JobSeekerProfile::insert(['user_id' => $register->id]);
         
-        // return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile,'otp'=>$register->otp], 200);
+        return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile,'otp'=>$register->otp], 200);
     }
     public function verify_otp(Request $request)
     {
@@ -54,7 +53,7 @@ class LoginController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors(),
-            ], 422);
+            ]);
         }
         $verifyOtp = User::where('mobile', $request->mobile)->first();
         if ($verifyOtp->otp == $request->otp) {
@@ -63,12 +62,12 @@ class LoginController extends Controller
                 'message' => "Otp Matched",
                 'user_id' => $verifyOtp->id,
                 'token' => Crypt::encryptString($verifyOtp->id),
-            ], 200);
+            ]);
         } else {
             return response()->json([
                 'success' => true,
                 'error' => "Invalid OTP",
-            ], 201);
+            ]);
         }
     }
 }
