@@ -27,7 +27,7 @@ class ProfileController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors(),
-            ], 422);
+            ], 205);
         }
         $role_language = User::find($request->user_id);
         $role_language->type = $request->input('role');
