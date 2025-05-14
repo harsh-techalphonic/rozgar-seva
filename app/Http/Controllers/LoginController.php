@@ -23,7 +23,7 @@ class LoginController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors(),
-            ], 422);
+            ], 205);
         }
 
         $register = new User;
