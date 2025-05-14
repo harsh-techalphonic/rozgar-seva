@@ -23,9 +23,9 @@ class LoginController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors(),
-            ], 205);
+            ]);
         }
-        echo 'hello';
+        // echo 'hello';
         // $register = new User;
         // $register->name = $request->input('name');
         // $register->mobile = $request->input('mobile');
