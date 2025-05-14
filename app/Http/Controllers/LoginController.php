@@ -41,7 +41,7 @@ class LoginController extends Controller
         });
         JobSeekerProfile::insert(['user_id' => $register->id]);
         
-        return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile], 200);
+        return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile,'otp'=>$register->otp], 200);
     }
     public function verify_otp(Request $request)
     {
