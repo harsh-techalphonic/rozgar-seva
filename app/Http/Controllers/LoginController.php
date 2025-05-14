@@ -25,23 +25,23 @@ class LoginController extends Controller
                 'errors' => $validator->errors(),
             ], 205);
         }
+        echo 'hello';
+        // $register = new User;
+        // $register->name = $request->input('name');
+        // $register->mobile = $request->input('mobile');
+        // $register->email = $request->input('email');
+        // $register->otp = rand(1111, 9999);
+        // $register->save();
+        // $email = $register->email;
+        // $htmlContent = "<p>OTP : <strong>{$register->otp}</strong></p>";
 
-        $register = new User;
-        $register->name = $request->input('name');
-        $register->mobile = $request->input('mobile');
-        $register->email = $request->input('email');
-        $register->otp = rand(1111, 9999);
-        $register->save();
-        $email = $register->email;
-        $htmlContent = "<p>OTP : <strong>{$register->otp}</strong></p>";
-
-        Mail::html($htmlContent, function ($message) use ($email) {
-            $message->to($email)
-                ->subject('OTP');
-        });
-        JobSeekerProfile::insert(['user_id' => $register->id]);
+        // Mail::html($htmlContent, function ($message) use ($email) {
+        //     $message->to($email)
+        //         ->subject('OTP');
+        // });
+        // JobSeekerProfile::insert(['user_id' => $register->id]);
         
-        return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile,'otp'=>$register->otp], 200);
+        // return response()->json(['user_id' => $register->id, 'mobile' => $register->mobile,'otp'=>$register->otp], 200);
     }
     public function verify_otp(Request $request)
     {
